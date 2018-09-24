@@ -1,4 +1,4 @@
-﻿namespace UserApi.Models
+﻿namespace Music.Web.Api.Models
 {
     public class Artist
     {

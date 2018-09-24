@@ -1,21 +1,22 @@
-﻿using MediatR;
-using AutoMapper;
-using UserApi.Data;
-using UserApi.Models;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using UserApi.Resolvers.Requests;
+using AutoMapper;
+using MediatR;
+using Music.Web.Api.Data;
+using Music.Web.Api.Models;
+using Music.Web.Api.Resolvers.Requests;
+using UserApi.Data;
 
-namespace UserApi.Resolvers
+namespace Music.Web.Api.Resolvers
 {
     public class ArtistResolver
         : IRequestHandler<ArtistCollectionRequest, List<Artist>>
     {
+        private readonly IRepository<UserApi.Data.Models.Artist> _artistRepository;
         private readonly IMapper _objectMapper;
-        private readonly IRepository<Data.Models.Artist> _artistRepository;
 
-        public ArtistResolver(IMapper objectMapper, IRepository<Data.Models.Artist> artistRepository)
+        public ArtistResolver(IMapper objectMapper, IRepository<UserApi.Data.Models.Artist> artistRepository)
         {
             _objectMapper = objectMapper;
             _artistRepository = artistRepository;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using UserApi.Models;
+using Music.Web.Api.Models;
 
-namespace UserApi.Resolvers.Requests
+namespace Music.Web.Api.Resolvers.Requests
 {
     public class BandCollectionRequest : IRequest<List<Band>>
     {

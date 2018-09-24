@@ -1,6 +1,6 @@
-﻿using UserApi.Queries;
+﻿using Music.Web.Api.Queries;
 
-namespace UserApi.Schema
+namespace Music.Web.Api.Schema
 {
     public class MusicSchema : GraphQL.Types.Schema
     {

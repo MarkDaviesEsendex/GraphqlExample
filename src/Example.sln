@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserApi", "UserApi\UserApi.csproj", "{F693D5D4-C215-4096-BB42-B0DC7C125EDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Music.Web.Api", "MusicExample\Music.Web.Api.csproj", "{A0860EF0-7D6A-45C1-BB68-FECEA73628DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F693D5D4-C215-4096-BB42-B0DC7C125EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F693D5D4-C215-4096-BB42-B0DC7C125EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F693D5D4-C215-4096-BB42-B0DC7C125EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F693D5D4-C215-4096-BB42-B0DC7C125EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0860EF0-7D6A-45C1-BB68-FECEA73628DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0860EF0-7D6A-45C1-BB68-FECEA73628DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0860EF0-7D6A-45C1-BB68-FECEA73628DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0860EF0-7D6A-45C1-BB68-FECEA73628DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

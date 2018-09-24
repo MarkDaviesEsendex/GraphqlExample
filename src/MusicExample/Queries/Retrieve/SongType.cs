@@ -1,7 +1,7 @@
 ﻿using GraphQL.Types;
-using UserApi.Models;
+using Music.Web.Api.Models;
 
-namespace UserApi.Queries.Retrieve
+namespace Music.Web.Api.Queries.Retrieve
 {
     public class SongType : ObjectGraphType<Song>
     {

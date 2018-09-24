@@ -11,20 +11,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Music.Web.Api.Data;
+using Music.Web.Api.Queries;
+using Music.Web.Api.Schema;
 using UserApi.Data;
-using UserApi.Queries;
-using UserApi.Schema;
 
-namespace UserApi
+namespace Music.Web.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -49,13 +50,9 @@ namespace UserApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseHsts();
-            }
             app.UseWebSockets();
             app.UseGraphQLWebSockets<MusicSchema>();
             app.UseGraphQL<MusicSchema>();
@@ -65,8 +62,8 @@ namespace UserApi
             app.UseMvc(builder =>
             {
                 builder.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

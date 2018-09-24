@@ -1,4 +1,4 @@
-﻿namespace UserApi.Data.Models
+﻿namespace Music.Web.Api.Data.Models
 {
     public interface IPersistentObject
     {

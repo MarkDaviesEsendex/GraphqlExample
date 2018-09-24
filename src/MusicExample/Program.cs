@@ -4,10 +4,12 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Music.Web.Api.Data;
+using Music.Web.Api.Data.Models;
 using UserApi.Data;
 using UserApi.Data.Models;
 
-namespace UserApi
+namespace Music.Web.Api
 {
     public class Program
     {
@@ -34,9 +36,11 @@ namespace UserApi
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+        }
     }
 
     public static class DbInitializer
@@ -52,7 +56,7 @@ namespace UserApi
                 new Band {Id = 5, Name = "Boston"},
                 new Band {Id = 6, Name = "Aqua"},
                 new Band {Id = 7, Name = "Spice Girls"},
-                new Band {Id = 8, Name = "Toto"},
+                new Band {Id = 8, Name = "Toto"}
             };
             context.Bands.AddRange(bands);
 
@@ -63,10 +67,10 @@ namespace UserApi
             };
             context.Artists.AddRange(artists);
 
-            var bandArtists = new List<BandArtist>
+            var bandArtists = new List<BandMember>
             {
-                new BandArtist {BandId = 1, ArtistId = 1},
-                new BandArtist {BandId = 1, ArtistId = 2}
+                new BandMember {BandId = 1, ArtistId = 1},
+                new BandMember {BandId = 1, ArtistId = 2}
             };
             context.BandArtists.AddRange(bandArtists);
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UserApi.Data.Models;
+using Music.Web.Api.Data.Models;
 
-namespace UserApi.Data
+namespace Music.Web.Api.Data
 {
     public interface IRepository<T> where T : class, IPersistentObject
     {

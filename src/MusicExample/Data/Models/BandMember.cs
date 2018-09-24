@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UserApi.Data.Models;
 
 namespace Music.Web.Api.Data.Models
 {
-    public class Album : IPersistentObject
+    public class BandMember : IPersistentObject
     {
-        public string Name { get; set; }
+        public int BandId { get; set; }
+        public int ArtistId { get; set; }
 
         [Key] public int Id { get; set; }
     }

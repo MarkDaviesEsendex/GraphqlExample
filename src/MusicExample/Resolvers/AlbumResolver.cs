@@ -3,17 +3,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Music.Web.Api.Data;
+using Music.Web.Api.Models;
+using Music.Web.Api.Resolvers.Requests;
 using UserApi.Data;
-using UserApi.Models;
-using UserApi.Resolvers.Requests;
 
-namespace UserApi.Resolvers
+namespace Music.Web.Api.Resolvers
 {
     public class AlbumResolver
         : IRequestHandler<AlbumCollectionRequest, List<Album>>
     {
-        private readonly IMapper _objectMapper;
         private readonly IRepository<Data.Models.Album> _albumRepository;
+        private readonly IMapper _objectMapper;
 
         public AlbumResolver(IMapper objectMapper, IRepository<Data.Models.Album> albumRepository)
         {

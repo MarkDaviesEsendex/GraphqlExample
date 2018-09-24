@@ -1,24 +1,44 @@
-﻿using MediatR;
-using GraphQL.Types;
-using UserApi.Queries.Retrieve;
-using UserApi.Resolvers.Requests;
+﻿using GraphQL.Types;
+using MediatR;
+using Music.Web.Api.Queries.Retrieve;
+using Music.Web.Api.Resolvers.Requests;
 
-namespace UserApi.Queries
+namespace Music.Web.Api.Queries
 {
     public class MusicQuery : ObjectGraphType
     {
         public MusicQuery(IMediator mediator)
         {
-            Field<ListGraphType<ArtistType>>("artist",
+            Field<ListGraphType<ArtistType>>("artists",
+                arguments: new QueryArguments
+                {
+                    new QueryArgument<IntGraphType> { Name = "first"},
+                    new QueryArgument<IntGraphType> { Name = "offset"}
+                },
                 resolve: context => mediator.Send(new ArtistCollectionRequest()));
-
-            Field<ListGraphType<AlbumType>>("album",
+            
+            Field<ListGraphType<AlbumType>>("albums",
+                arguments: new QueryArguments
+                {
+                    new QueryArgument<IntGraphType> { Name = "first"},
+                    new QueryArgument<IntGraphType> { Name = "offset"}
+                },
                 resolve: context => mediator.Send(new AlbumCollectionRequest()));
 
-            Field<ListGraphType<BandType>>("band",
+            Field<ListGraphType<BandType>>("bands",
+                arguments: new QueryArguments
+                {
+                    new QueryArgument<IntGraphType> { Name = "first"},
+                    new QueryArgument<IntGraphType> { Name = "offset"}
+                },
                 resolve: context => mediator.Send(new BandCollectionRequest()));
 
-            Field<ListGraphType<SongType>>("song",
+            Field<ListGraphType<SongType>>("songs",
+                arguments: new QueryArguments
+                {
+                    new QueryArgument<IntGraphType> { Name = "first"},
+                    new QueryArgument<IntGraphType> { Name = "offset"}
+                },
                 resolve: context => mediator.Send(new SongCollectionRequest()));
         }
     }
