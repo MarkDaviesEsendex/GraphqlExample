@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Music.Web.Api.Data.Models;
-using UserApi.Data.Models;
 
 namespace Music.Web.Api.Data
 {

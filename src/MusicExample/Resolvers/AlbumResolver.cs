@@ -6,7 +6,6 @@ using MediatR;
 using Music.Web.Api.Data;
 using Music.Web.Api.Models;
 using Music.Web.Api.Resolvers.Requests;
-using UserApi.Data;
 
 namespace Music.Web.Api.Resolvers
 {

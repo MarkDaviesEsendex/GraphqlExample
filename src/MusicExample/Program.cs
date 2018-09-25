@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Music.Web.Api.Data;
 using Music.Web.Api.Data.Models;
-using UserApi.Data;
-using UserApi.Data.Models;
 
 namespace Music.Web.Api
 {

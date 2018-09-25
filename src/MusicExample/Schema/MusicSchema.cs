@@ -1,12 +1,14 @@
-﻿using Music.Web.Api.Queries;
+﻿using GraphQL;
+using Music.Web.Api.Queries;
 
 namespace Music.Web.Api.Schema
 {
     public class MusicSchema : GraphQL.Types.Schema
     {
-        public MusicSchema(MusicQuery query)
+        public MusicSchema(IDependencyResolver resolver)
+            : base(resolver)
         {
-            Query = query;
+            Query = resolver.Resolve<MusicQuery>();
         }
     }
 }

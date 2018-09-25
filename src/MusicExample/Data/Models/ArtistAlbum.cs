@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UserApi.Data.Models;
 
 namespace Music.Web.Api.Data.Models
 {

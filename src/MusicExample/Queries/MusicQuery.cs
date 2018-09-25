@@ -8,14 +8,23 @@ namespace Music.Web.Api.Queries
     public class MusicQuery : ObjectGraphType
     {
         public MusicQuery(IMediator mediator)
-        {
-            Field<ListGraphType<ArtistType>>("artists",
+        { 
+//            Field<ListGraphType<ArtistType>>("artists",
+//                arguments: new QueryArguments
+//                {
+//                    new QueryArgument<IntGraphType> {Name = "first"},
+//                    new QueryArgument<IntGraphType> {Name = "offset"}
+//                },
+//                resolve: context =>
+//                    mediator.Send(new ArtistCollectionRequest(context.GetArgument<int>("first"), context.GetArgument<int>("offset"))));
+//
+            Field<ArtistType>("artist",
                 arguments: new QueryArguments
                 {
-                    new QueryArgument<IntGraphType> { Name = "first"},
-                    new QueryArgument<IntGraphType> { Name = "offset"}
+                    new QueryArgument<IntGraphType> {Name = "id"}
                 },
-                resolve: context => mediator.Send(new ArtistCollectionRequest()));
+                resolve: context =>
+                    mediator.Send(new ArtistRequest(context.GetArgument<int>("id"))));
             
             Field<ListGraphType<AlbumType>>("albums",
                 arguments: new QueryArguments
@@ -40,6 +49,14 @@ namespace Music.Web.Api.Queries
                     new QueryArgument<IntGraphType> { Name = "offset"}
                 },
                 resolve: context => mediator.Send(new SongCollectionRequest()));
+        }
+    }
+    
+    public class ArtistQuery : ObjectGraphType
+    {
+        public ArtistQuery(IMediator mediator)
+        {
+            
         }
     }
 }

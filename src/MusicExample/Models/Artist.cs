@@ -1,4 +1,6 @@
-﻿namespace Music.Web.Api.Models
+﻿using System.Security.Principal;
+
+namespace Music.Web.Api.Models
 {
     public class Artist
     {
