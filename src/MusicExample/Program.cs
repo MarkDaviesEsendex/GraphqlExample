@@ -34,11 +34,8 @@ namespace Music.Web.Api
             host.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-        }
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args) 
+            => WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
     }
 
     public static class DbInitializer
@@ -53,8 +50,8 @@ namespace Music.Web.Api
                 new Band {Id = 4, Name = "Judas Priest"},
                 new Band {Id = 5, Name = "Boston"},
                 new Band {Id = 6, Name = "Aqua"},
-                new Band {Id = 7, Name = "Spice Girls"},
-                new Band {Id = 8, Name = "Toto"}
+                new Band {Id = 8, Name = "Toto"},
+                new Band {Id = 9, Name = "Ozzy Osbourne"} 
             };
             context.Bands.AddRange(bands);
 

@@ -28,7 +28,6 @@ namespace Music.Web.Api.Resolvers
             var artists = _artistRepository.Get()
                 .Skip(collectionRequest.Offset)
                 .Take(collectionRequest.NumberOfRecords);
-            
             return Task.FromResult(_objectMapper.Map<List<Artist>>(artists));
         }
 
