@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Music.Web.Api.Data.Models;
 
@@ -7,6 +8,7 @@ namespace Music.Web.Api.Data
     public interface IRepository<T> where T : class, IPersistentObject
     {
         List<T> Get();
+        List<T> Where(Func<T, bool> expression);
     }
 
     public class Repository<T> : IRepository<T> where T : class, IPersistentObject
@@ -21,6 +23,11 @@ namespace Music.Web.Api.Data
         public List<T> Get()
         {
             return _context.Set<T>().ToList();
+        }
+
+        public List<T> Where(Func<T, bool> expression)
+        {
+            return _context.Set<T>().Where(expression).ToList();
         }
     }
 }

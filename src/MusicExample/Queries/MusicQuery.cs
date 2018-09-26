@@ -16,45 +16,28 @@ namespace Music.Web.Api.Queries
                 .Resolve(context =>
                     mediator.Send(new ArtistCollectionRequest(context.GetArgument<int>("first"), context.GetArgument<int>("offset"))));
 
-            Field<ArtistType>("artist",
-                arguments: new QueryArguments
-                {
-                    new QueryArgument<IntGraphType> {Name = "id"}
-                },
-                resolve: context =>
-                    mediator.Send(new ArtistRequest(context.GetArgument<int>("id"))));
+            Field<ArtistType>()
+                .Name("artist")
+                .Argument<NonNullGraphType<IntGraphType>>("id", "Id of the artist")
+                .Resolve(context => mediator.Send(new ArtistRequest(context.GetArgument<int>("id"))));
             
-            Field<ListGraphType<AlbumType>>("albums",
-                arguments: new QueryArguments
-                {
-                    new QueryArgument<IntGraphType> { Name = "first"},
-                    new QueryArgument<IntGraphType> { Name = "offset"}
-                },
-                resolve: context => mediator.Send(new AlbumCollectionRequest()));
-
-            Field<ListGraphType<BandType>>("bands",
-                arguments: new QueryArguments
-                {
-                    new QueryArgument<IntGraphType> { Name = "first"},
-                    new QueryArgument<IntGraphType> { Name = "offset"}
-                },
-                resolve: context => mediator.Send(new BandCollectionRequest()));
-
-            Field<ListGraphType<SongType>>("songs",
-                arguments: new QueryArguments
-                {
-                    new QueryArgument<IntGraphType> { Name = "first"},
-                    new QueryArgument<IntGraphType> { Name = "offset"}
-                },
-                resolve: context => mediator.Send(new SongCollectionRequest()));
-        }
-    }
-    
-    public class ArtistQuery : ObjectGraphType
-    {
-        public ArtistQuery(IMediator mediator)
-        {
+            Field<ListGraphType<AlbumType>>()
+                .Name("albums")
+                .Argument<NonNullGraphType<IntGraphType>>("first", "Used to select specified number of records")
+                .Argument<NonNullGraphType<IntGraphType>>("offset", "Zero indexed offset for selector")
+                .Resolve(context => mediator.Send(new AlbumCollectionRequest()));
             
+            Field<ListGraphType<BandType>>()
+                .Name("bands")
+                .Argument<NonNullGraphType<IntGraphType>>("first", "Used to select specified number of records")
+                .Argument<NonNullGraphType<IntGraphType>>("offset", "Zero indexed offset for selector")
+                .Resolve(context => mediator.Send(new BandCollectionRequest()));
+            
+            Field<ListGraphType<SongType>>()
+                .Name("songs")
+                .Argument<NonNullGraphType<IntGraphType>>("first", "Used to select specified number of records")
+                .Argument<NonNullGraphType<IntGraphType>>("offset", "Zero indexed offset for selector")
+                .Resolve(context => mediator.Send(new SongCollectionRequest()));
         }
     }
 }

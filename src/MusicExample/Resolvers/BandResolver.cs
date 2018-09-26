@@ -29,21 +29,22 @@ namespace Music.Web.Api.Resolvers
 
         public Task<List<Band>> Handle(BandCollectionRequest collectionRequest, CancellationToken cancellationToken)
         {
-            var artists = _bandRepository.Get();
-            return Task.FromResult(_objectMapper.Map<List<Band>>(artists));
+            var bands = _bandRepository.Get();
+            return Task.FromResult(_objectMapper.Map<List<Band>>(bands));
         }
 
         public Task<Band> Handle(BandRequest request, CancellationToken cancellationToken)
         {
-            var artists = _bandRepository.Get().Where(band => band.Id == request.Id);
-            return Task.FromResult(_objectMapper.Map<Band>(artists));
+            var bands = _bandRepository.Where(band => band.Id == request.Id);
+            return Task.FromResult(_objectMapper.Map<Band>(bands));
         }
 
         public Task<List<Band>> Handle(BandByArtistRequest request, CancellationToken cancellationToken)
         {
-            var bandIds = _bandMemberRepository.Get().Where(member => request.ArtistId.Any(i => i == member.ArtistId))
+            var bandIds = _bandMemberRepository.Where(member => request.ArtistId.Any(i => i == member.ArtistId))
                 .Select(member => member.BandId);
-            var bands = _bandRepository.Get().Where(band => bandIds.Any(i => i == band.Id));
+            
+            var bands = _bandRepository.Where(band => bandIds.Any(i => i == band.Id));
             return Task.FromResult(_objectMapper.Map<List<Band>>(bands));
         }
     }

@@ -50,8 +50,8 @@ namespace Music.Web.Api
                 new Band {Id = 4, Name = "Judas Priest"},
                 new Band {Id = 5, Name = "Boston"},
                 new Band {Id = 6, Name = "Aqua"},
-                new Band {Id = 8, Name = "Toto"},
-                new Band {Id = 9, Name = "Black Sabbath"} 
+                new Band {Id = 7, Name = "Toto"},
+                new Band {Id = 8, Name = "Black Sabbath"} 
             };
             context.Bands.AddRange(bands);
 
@@ -334,20 +334,27 @@ namespace Music.Web.Api
                 new AlbumSong{AlbumId = 7, SongId = 55},
                 
                 // Paranoid
-                new AlbumSong{AlbumId = 7, SongId = 56},
-                new AlbumSong{AlbumId = 7, SongId = 57},
-                new AlbumSong{AlbumId = 7, SongId = 58},
-                new AlbumSong{AlbumId = 7, SongId = 59},
-                new AlbumSong{AlbumId = 7, SongId = 60},
-                new AlbumSong{AlbumId = 7, SongId = 61},
-                new AlbumSong{AlbumId = 7, SongId = 62},
-                new AlbumSong{AlbumId = 7, SongId = 63},
+                new AlbumSong{AlbumId = 8, SongId = 56},
+                new AlbumSong{AlbumId = 8, SongId = 57},
+                new AlbumSong{AlbumId = 8, SongId = 58},
+                new AlbumSong{AlbumId = 8, SongId = 59},
+                new AlbumSong{AlbumId = 8, SongId = 60},
+                new AlbumSong{AlbumId = 8, SongId = 61},
+                new AlbumSong{AlbumId = 8, SongId = 62},
+                new AlbumSong{AlbumId = 8, SongId = 63},
             };
             context.AlbumSongs.AddRange(albumSongs);
 
-            var artistAlbums = new List<ArtistAlbum>
+            var artistAlbums = new List<BandAlbum>
             {
-
+                new BandAlbum { BandId = 1, AlbumId = 1},
+                new BandAlbum { BandId = 2, AlbumId = 2},
+                new BandAlbum { BandId = 3, AlbumId = 3},
+                new BandAlbum { BandId = 4, AlbumId = 4},
+                new BandAlbum { BandId = 5, AlbumId = 5},
+                new BandAlbum { BandId = 6, AlbumId = 6},
+                new BandAlbum { BandId = 7, AlbumId = 7},
+                new BandAlbum { BandId = 8, AlbumId = 8}
             };
             context.ArtistAlbums.AddRange(artistAlbums);
             context.SaveChanges();

@@ -13,7 +13,7 @@ namespace Music.Web.Api.Data
         public DbSet<Album> Albums { get; set; }
         public DbSet<AlbumSong> AlbumSongs { get; set; }
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<ArtistAlbum> ArtistAlbums { get; set; }
+        public DbSet<BandAlbum> ArtistAlbums { get; set; }
         public DbSet<Band> Bands { get; set; }
         public DbSet<BandMember> BandArtists { get; set; }
         public DbSet<Song> Songs { get; set; }
