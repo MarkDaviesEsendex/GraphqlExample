@@ -29,7 +29,9 @@ namespace Music.Web.Api.Resolvers
 
         public Task<List<Band>> Handle(BandCollectionRequest collectionRequest, CancellationToken cancellationToken)
         {
-            var bands = _bandRepository.Get();
+            var bands = _bandRepository.Get()
+                .Skip(collectionRequest.Offset)
+                .Take(collectionRequest.NumberOfRecords);
             return Task.FromResult(_objectMapper.Map<List<Band>>(bands));
         }
 

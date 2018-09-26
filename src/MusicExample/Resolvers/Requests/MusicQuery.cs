@@ -31,7 +31,7 @@ namespace Music.Web.Api.Queries
                 .Name("bands")
                 .Argument<NonNullGraphType<IntGraphType>>("first", "Used to select specified number of records")
                 .Argument<NonNullGraphType<IntGraphType>>("offset", "Zero indexed offset for selector")
-                .Resolve(context => mediator.Send(new BandCollectionRequest()));
+                .Resolve(context => mediator.Send(new BandCollectionRequest(context.GetArgument<int>("first"), context.GetArgument<int>("offset"))));
             
             Field<ListGraphType<SongType>>()
                 .Name("songs")
