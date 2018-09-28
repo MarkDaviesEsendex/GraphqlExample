@@ -13,17 +13,22 @@ namespace Music.Web.Api.Resolvers
 {
     public class AlbumResolver
         :   IRequestHandler<AlbumCollectionRequest, List<Album>>,
-            IRequestHandler<AlbumByBandRequest, List<Album>>
+            IRequestHandler<AlbumByBandRequest, List<Album>>,
+            IRequestHandler<AddAlbumWithSongs, Album>
     {
         private readonly IMapper _objectMapper;
         private readonly IRepository<Data.Models.Album> _albumRepository;
         private readonly IRepository<BandAlbum> _bandAlbumRepository;
+        private readonly IRepository<Song> _songRepository;
+        private readonly IRepository<AlbumSong> _albumSongRepository;
 
-        public AlbumResolver(IMapper objectMapper, IRepository<Data.Models.Album> albumRepository, IRepository<BandAlbum> bandAlbumRepository)
+        public AlbumResolver(IMapper objectMapper, IRepository<Data.Models.Album> albumRepository, IRepository<BandAlbum> bandAlbumRepository, IRepository<Song> songRepository, IRepository<AlbumSong> albumSongRepository)
         {
             _objectMapper = objectMapper;
             _albumRepository = albumRepository;
             _bandAlbumRepository = bandAlbumRepository;
+            _songRepository = songRepository;
+            _albumSongRepository = albumSongRepository;
         }
 
         public Task<List<Album>> Handle(AlbumCollectionRequest request, CancellationToken cancellationToken)
@@ -38,6 +43,19 @@ namespace Music.Web.Api.Resolvers
                 .Select(album => album.AlbumId);
             var albums = _albumRepository.Where(album => albumIds.Contains(album.Id));
             return Task.FromResult(_objectMapper.Map<List<Album>>(albums));
+        }
+
+        public Task<Album> Handle(AddAlbumWithSongs request, CancellationToken cancellationToken)
+        {
+            var album = _albumRepository.Save(new Data.Models.Album {Name = request.AlbumName});
+            var songs = _songRepository.Save(request.Songs.Select(sng => new Song {Name = sng}).ToList());
+            
+            foreach (var song in songs)
+            {
+                _albumSongRepository.Save(new AlbumSong {AlbumId = album.Id, SongId = song.Id});
+            }
+            
+            return Task.FromResult(_objectMapper.Map<Album>(album));
         }
     }
 }

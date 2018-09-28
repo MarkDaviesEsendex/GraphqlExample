@@ -9,6 +9,8 @@ namespace Music.Web.Api.Data
     {
         List<T> Get();
         List<T> Where(Func<T, bool> expression);
+        T Save(T obj);
+        ICollection<T> Save(ICollection<T> obj);
     }
 
     public class Repository<T> : IRepository<T> where T : class, IPersistentObject
@@ -28,6 +30,20 @@ namespace Music.Web.Api.Data
         public List<T> Where(Func<T, bool> expression)
         {
             return _context.Set<T>().Where(expression).ToList();
+        }
+
+        public T Save(T obj)
+        {
+            _context.Set<T>().Add(obj);
+            _context.SaveChanges();
+            return obj;
+        }
+        
+        public ICollection<T> Save(ICollection<T> obj)
+        {
+            _context.Set<T>().AddRange(obj);
+            _context.SaveChanges();
+            return obj;
         }
     }
 }

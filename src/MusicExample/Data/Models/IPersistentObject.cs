@@ -2,6 +2,6 @@
 {
     public interface IPersistentObject
     {
-        int Id { get; }
+        int Id { get; set; }
     }
 }

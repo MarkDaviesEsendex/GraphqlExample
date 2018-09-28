@@ -18,7 +18,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Music.Web.Api.Data;
 using Music.Web.Api.DataLoaders;
 using Music.Web.Api.Queries;
+using Music.Web.Api.Queries.Input;
 using Music.Web.Api.Queries.Retrieve;
+using Music.Web.Api.Resolvers.Requests;
 using Music.Web.Api.Schema;
 
 namespace Music.Web.Api
@@ -33,23 +35,26 @@ namespace Music.Web.Api
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
+            services.AddTransient<SampleDataGenerator>();
             services.AddScoped<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
             
             services.AddAutoMapper();
             services.AddMediatR(Assembly.GetAssembly(typeof(Startup)));
-
             services.AddDbContext<MusicDbContext>(options => options.UseInMemoryDatabase("Music"));
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient<IBandDataLoader, BandDataLoader>();
 
             services.AddTransient<MusicQuery>();
+            services.AddTransient<MusicMutation>();
             services.AddTransient<MusicSchema>();
 
             services.AddTransient<AlbumType>();
             services.AddTransient<ArtistType>();
             services.AddTransient<BandType>();
             services.AddTransient<SongType>();
+            
+            services.AddTransient<AlbumInputType>();
             services.AddGraphQL(options =>
                 {
                     options.EnableMetrics = true;
@@ -60,7 +65,7 @@ namespace Music.Web.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SampleDataGenerator dataGenerator)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
@@ -73,6 +78,7 @@ namespace Music.Web.Api
             app.UseGraphiQLServer(new GraphiQLOptions());
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
             app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+            dataGenerator.InsertData();
             app.UseMvc(builder =>
             {
                 builder.MapRoute(
